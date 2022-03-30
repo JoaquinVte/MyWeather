@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,11 +47,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         String url = Parameters.ICON_URL + list.get(position).weather.get(0).icon + "@2x.png";
         ImageDownloader.DownloadImage(context, url,holder.image);
         Date date = new Date((long)list.get(position).dt*1000);
-        SimpleDateFormat dateFor = new SimpleDateFormat("E");
+        SimpleDateFormat dateFor = new SimpleDateFormat("EEEE",new Locale( "es" , "ES" ));
         SimpleDateFormat timeFor = new SimpleDateFormat("hh:mm");
         String stringDate= dateFor.format(date);
         String stringTime = timeFor.format(date);
         holder.day.setText(stringDate);
+        holder.time.setText(stringTime);
+        holder.description.setText(String.valueOf(list.get(position).weather.get(0).description));
+        holder.tmax.setText(String.valueOf(list.get(position).main.temp_max).concat("º"));
+        holder.tmin.setText(String.valueOf(list.get(position).main.temp_min).concat("º"));
+        holder.temp.setText(String.valueOf(list.get(position).main.temp).concat("º"));
     }
 
     @Override
