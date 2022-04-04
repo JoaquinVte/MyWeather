@@ -2,6 +2,7 @@ package es.ieslavereda.myweather.activities;
 
 import static es.ieslavereda.myweather.Parameters.API;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +24,12 @@ import es.ieslavereda.myweather.base.CallInterface;
 
 public class PrevisionActivity extends BaseActivity implements CallInterface, View.OnClickListener {
 
+    private static final String TAG = PrevisionActivity.class.getName();
+
     private Root root;
     private RecyclerView recyclerView;
     private List<es.ieslavereda.myweather.activities.List> datos;
     private Place place;
-
-    private static final String TAG = PrevisionActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
 
             ciudad.setText(place.getName());
 
+            recyclerView.setOnClickListener(this);
             MyRecyclerViewAdapter myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, datos);
             myRecyclerViewAdapter.setOnClickListener(this);
             recyclerView.setAdapter(myRecyclerViewAdapter);
@@ -55,6 +57,8 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, RecyclerView.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);
 
+
+
         } else {
             Toast.makeText(this,"No se ha seleccionado ninguna ciudad",Toast.LENGTH_SHORT).show();
         }
@@ -63,12 +67,12 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
     @Override
     protected void onResume() {
         super.onResume();
+        showProgress();
         executeCall(this);
     }
 
     @Override
     public void doInBackground() {
-        showProgress();
         String url = "forecast?lang=es&units=metric&lat="+ place.getLat() + "&lon="+ place.getLon() +"&appid="+ API;
         Log.d(TAG, url);
         root = Connector.getConector().get(Root.class,url);
@@ -81,7 +85,11 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
     }
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View view) {
+        int position = recyclerView.getChildAdapterPosition(view);
+        Intent intent = new Intent(this,DetailActivity.class);
+        intent.putExtra("root",root);
+        intent.putExtra("position",position);
+        startActivity(intent);
     }
 }

@@ -19,23 +19,27 @@ public class ImageDownloader {
 
     private static RequestQueue colaPeticiones ;
 
-    public static void DownloadImage(Context context, String url, ImageView imageView){
+    private final static String TAG = ImageDownloader.class.getName();
+    public static void downloadImage(String url, ImageView imageView){
         Picasso.get().load(url).into(imageView);
-//        ImageRequest peticion = new ImageRequest(
-//                url,
-//                new Response.Listener<Bitmap>() {
-//                    @Override public void onResponse(Bitmap bitmap) {
-//                        imageView.setImageBitmap(bitmap);
-//                    }
-//                }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
-//                new Response.ErrorListener() {
-//                    @Override public void onErrorResponse(VolleyError error) {
-//                        imageView.setImageResource(R.drawable.ic_launcher_background);
-//                        Log.e("ImageDowloader",error.getMessage());
-//                    }
-//                }
-//        );
-//        getRequestQueue(context).add(peticion);
+    }
+
+    public static void downloadImage(Context context, String url, ImageView imageView, int defaultDrawable){
+        ImageRequest peticion = new ImageRequest(
+                url,
+                new Response.Listener<Bitmap>() {
+                    @Override public void onResponse(Bitmap bitmap) {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
+                new Response.ErrorListener() {
+                    @Override public void onErrorResponse(VolleyError error) {
+                        imageView.setImageResource(defaultDrawable);
+                        Log.e(TAG,error.getMessage());
+                    }
+                }
+        );
+        getRequestQueue(context).add(peticion);
     }
 
     private static RequestQueue getRequestQueue(Context context){
@@ -43,8 +47,4 @@ public class ImageDownloader {
             colaPeticiones = Volley.newRequestQueue(context);
         return colaPeticiones;
     }
-
-
-
-
 }

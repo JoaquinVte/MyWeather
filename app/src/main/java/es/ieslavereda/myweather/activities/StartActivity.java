@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import es.ieslavereda.myweather.Parameters;
 import es.ieslavereda.myweather.R;
@@ -38,7 +37,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 place = adapter.getItem(i);
-                ImageDownloader.DownloadImage(getApplicationContext(),place.getImage_url(), imagePlace);
+                ImageDownloader.downloadImage(place.getImage_url(), imagePlace);
             }
 
             @Override

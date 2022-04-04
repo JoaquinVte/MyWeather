@@ -44,14 +44,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String url = Parameters.ICON_URL + list.get(position).weather.get(0).icon + "@2x.png";
-        ImageDownloader.DownloadImage(context, url,holder.image);
+        String url = Parameters.ICON_URL_PRE + list.get(position).weather.get(0).icon + Parameters.ICON_URL_POST;
+        ImageDownloader.downloadImage( url,holder.image);
         Date date = new Date((long)list.get(position).dt*1000);
-        SimpleDateFormat dateFor = new SimpleDateFormat("EEEE",new Locale( "es" , "ES" ));
+        SimpleDateFormat dayFor = new SimpleDateFormat("EEEE",new Locale( "es" , "ES" ));
         SimpleDateFormat timeFor = new SimpleDateFormat("hh:mm");
-        String stringDate= dateFor.format(date);
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        String stringDay= dayFor.format(date);
         String stringTime = timeFor.format(date);
-        holder.day.setText(stringDate);
+        holder.day.setText(stringDay);
+        holder.date.setText(dateFor.format(date));
         holder.time.setText(stringTime);
         holder.description.setText(String.valueOf(list.get(position).weather.get(0).description));
         holder.tmax.setText(String.valueOf(list.get(position).main.temp_max).concat("º"));
@@ -72,6 +74,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         ImageView image;
         TextView day;
+        TextView date;
         TextView time;
         TextView description;
         TextView temp;
@@ -82,6 +85,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             super(itemView);
             image = itemView.findViewById(R.id.image);
             day = itemView.findViewById(R.id.day);
+            date = itemView.findViewById(R.id.date);
             description = itemView.findViewById(R.id.description);
             time = itemView.findViewById(R.id.time);
             temp = itemView.findViewById(R.id.temp);
