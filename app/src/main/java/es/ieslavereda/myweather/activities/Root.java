@@ -53,7 +53,7 @@ class List{
 }
 
 class Coord{
-    public int lat;
+    public double lat;
     public double lon;
 }
 
