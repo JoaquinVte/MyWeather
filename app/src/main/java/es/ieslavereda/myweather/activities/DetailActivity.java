@@ -4,7 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import es.ieslavereda.myweather.Parameters;
 import es.ieslavereda.myweather.R;
@@ -14,6 +20,8 @@ public class DetailActivity extends AppCompatActivity {
 
     Root root;
     int position;
+    private TextView textViewDate;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +32,17 @@ public class DetailActivity extends AppCompatActivity {
         root = (Root) intent.getExtras().getSerializable("root");
         position = intent.getExtras().getInt("position");
 
-        ImageView imageView = findViewById(R.id.image);
+        imageView = findViewById(R.id.image);
+        textViewDate  = findViewById(R.id.date);
 
         ImageDownloader.downloadImage(Parameters.ICON_URL_PRE + root.list.get(position).weather.get(0).icon + Parameters.ICON_URL_POST,imageView);
+        Date date = new Date((long)root.list.get(position).dt*1000);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd/MM/yyyy hh:mm",new Locale( "es" , "ES" ));
+        String stringDay= dateFormat.format(date);
 
-
+        textViewDate.setText(stringDay);
+    }
+    public void close(View v){
+        finish();
     }
 }
