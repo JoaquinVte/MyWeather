@@ -1,7 +1,8 @@
 package es.ieslavereda.myweather.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 
 import es.ieslavereda.myweather.Parameters;
 import es.ieslavereda.myweather.R;
@@ -53,7 +60,17 @@ public class StartActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),PrevisionActivity.class);
                 intent.putExtra("place" , place);
                 startActivity(intent);
+
+//                MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
+//                        .setTimeFormat(TimeFormat.CLOCK_24H)
+//                        .setHour(12)
+//                        .setMinute(0)
+//                        .setTitleText("Select Appointment time")
+//                        .build();
+//
+//                materialTimePicker.showNow(getSupportFragmentManager(), materialTimePicker.toString());
             }
         });
     }
+
 }

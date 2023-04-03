@@ -57,8 +57,6 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, RecyclerView.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);
 
-
-
         } else {
             Toast.makeText(this,"No se ha seleccionado ninguna ciudad",Toast.LENGTH_SHORT).show();
         }

@@ -14,6 +14,7 @@ public class Parameters {
     public static final String ICON_URL_POST = "@2x.png";
 
     public static List<Place> placeList = new ArrayList<>();
+
     static {
         placeList.add(new Place("Valencia","https://phantom-elmundo.unidadeditorial.es/2959d66274f76ba77c5fd314344e7d66/crop/2x0/3072x2047/resize/473/f/webp/assets/multimedia/imagenes/2022/02/22/16455200722788.jpg",39.4077643f,-0.4315509f));
         placeList.add(new Place("Barcelona","https://fotos.hoteles.net/articulos/guia-barcelona-ciudad-2400-1.jpg",41.3926467f,2.0701496f));

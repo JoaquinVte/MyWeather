@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,21 +43,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String url = Parameters.ICON_URL_PRE + list.get(position).weather.get(0).icon + Parameters.ICON_URL_POST;
-        ImageDownloader.downloadImage( url,holder.image);
+        String url = Parameters.ICON_URL_PRE+ list.get(position).weather.get(0).icon + Parameters.ICON_URL_POST;
+        ImageDownloader.downloadImage(url,holder.image);
         Date date = new Date((long)list.get(position).dt*1000);
-        SimpleDateFormat dayFor = new SimpleDateFormat("EEEE",new Locale( "es" , "ES" ));
+        SimpleDateFormat dateFor = new SimpleDateFormat("E");
         SimpleDateFormat timeFor = new SimpleDateFormat("hh:mm");
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
-        String stringDay= dayFor.format(date);
+        String stringDate= dateFor.format(date);
         String stringTime = timeFor.format(date);
-        holder.day.setText(stringDay);
-        holder.date.setText(dateFor.format(date));
-        holder.time.setText(stringTime);
-        holder.description.setText(String.valueOf(list.get(position).weather.get(0).description));
-        holder.tmax.setText(String.valueOf(list.get(position).main.temp_max).concat("º"));
-        holder.tmin.setText(String.valueOf(list.get(position).main.temp_min).concat("º"));
-        holder.temp.setText(String.valueOf(list.get(position).main.temp).concat("º"));
+        holder.day.setText(stringDate);
     }
 
     @Override
@@ -74,7 +66,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         ImageView image;
         TextView day;
-        TextView date;
         TextView time;
         TextView description;
         TextView temp;
@@ -85,7 +76,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             super(itemView);
             image = itemView.findViewById(R.id.image);
             day = itemView.findViewById(R.id.day);
-            date = itemView.findViewById(R.id.date);
             description = itemView.findViewById(R.id.description);
             time = itemView.findViewById(R.id.time);
             temp = itemView.findViewById(R.id.temp);
