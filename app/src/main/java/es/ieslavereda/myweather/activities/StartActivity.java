@@ -5,6 +5,8 @@ package es.ieslavereda.myweather.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -71,6 +73,25 @@ public class StartActivity extends AppCompatActivity {
 //                materialTimePicker.showNow(getSupportFragmentManager(), materialTimePicker.toString());
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.configuracion):
+                Intent intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
+                startActivity(intentPreferenciasActivity);
+                return true;
+            case (R.id.exit):
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

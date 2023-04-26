@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,12 +27,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private View.OnClickListener onClickListener;
     private Context context;
 
-
     public MyRecyclerViewAdapter(Context context, List<es.ieslavereda.myweather.activities.List> list){
         this.list = list;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -46,11 +48,21 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         String url = Parameters.ICON_URL_PRE+ list.get(position).weather.get(0).icon + Parameters.ICON_URL_POST;
         ImageDownloader.downloadImage(url,holder.image);
         Date date = new Date((long)list.get(position).dt*1000);
-        SimpleDateFormat dateFor = new SimpleDateFormat("E");
+        SimpleDateFormat dayFor = new SimpleDateFormat("EEEE",new Locale( GestionPreferencias.getInstance().getIdioma(context) , GestionPreferencias.getInstance().getIdioma(context).toUpperCase() ));
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat timeFor = new SimpleDateFormat("hh:mm");
+        String stringDay= dayFor.format(date);
         String stringDate= dateFor.format(date);
         String stringTime = timeFor.format(date);
-        holder.day.setText(stringDate);
+        holder.day.setText(stringDay);
+        holder.list = list.get(position);
+        holder.time.setText(stringTime);
+        holder.date.setText(stringDate);
+        holder.description.setText(list.get(position).weather.get(0).description);
+        holder.tmax.setText((int)list.get(position).main.temp_max+"º");
+        holder.tmin.setText((int)list.get(position).main.temp_min+"º");
+
+        holder.setBackgroud((position%2==0)?context.getResources().getColor(R.color.holder_backgroud_even):context.getColor(R.color.holder_backgroud_odd));
     }
 
     @Override
@@ -71,9 +83,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView temp;
         TextView tmax;
         TextView tmin;
+        TextView date;
+
+        es.ieslavereda.myweather.activities.List list;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             image = itemView.findViewById(R.id.image);
             day = itemView.findViewById(R.id.day);
             description = itemView.findViewById(R.id.description);
@@ -81,7 +97,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             temp = itemView.findViewById(R.id.temp);
             tmax = itemView.findViewById(R.id.tmax);
             tmin = itemView.findViewById(R.id.tmin);
+            date = itemView.findViewById(R.id.date);
         }
+
+        public void setBackgroud(int color){
+            super.itemView.setBackgroundColor(color);
+        }
+
 
     }
 

@@ -16,9 +16,11 @@ public class Parameters {
     public static List<Place> placeList = new ArrayList<>();
 
     static {
-        placeList.add(new Place("Valencia","https://phantom-elmundo.unidadeditorial.es/2959d66274f76ba77c5fd314344e7d66/crop/2x0/3072x2047/resize/473/f/webp/assets/multimedia/imagenes/2022/02/22/16455200722788.jpg",39.4077643f,-0.4315509f));
+        placeList.add(new Place("IES La Vereda","https://portal.edu.gva.es/lavereda/wp-content/uploads/sites/107/2022/12/FOTO-IES-LA-VEREDA.png",39.5862518f,-0.5423662f));
+        placeList.add(new Place("Valencia","https://mundopositor.info/wp-content/uploads/2022/05/Ayuntamiento-de-Valencia.png",39.4077643f,-0.4315509f));
         placeList.add(new Place("Barcelona","https://fotos.hoteles.net/articulos/guia-barcelona-ciudad-2400-1.jpg",41.3926467f,2.0701496f));
-        placeList.add(new Place("Madrid","https://s03.s3c.es/imag/_v0/770x420/f/7/a/madrid-centro-coches-dreamstime.jpg",40.4378698f,-3.8196191f));
+        placeList.add(new Place("Madrid","https://soreco-group.com/wp-content/uploads/2022/06/madrid.png",40.4378698f,-3.8196191f));
+
     }
 
 }

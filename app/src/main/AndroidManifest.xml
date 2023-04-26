@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MyWeather"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.PreferenciasActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DetailActivity"
             android:exported="false" />
         <activity
@@ -26,7 +29,7 @@
         </activity>
         <activity
             android:name=".activities.PrevisionActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

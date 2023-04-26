@@ -71,7 +71,7 @@ public class PrevisionActivity extends BaseActivity implements CallInterface, Vi
 
     @Override
     public void doInBackground() {
-        String url = "forecast?lang=es&units=metric&lat="+ place.getLat() + "&lon="+ place.getLon() +"&appid="+ API;
+        String url = "forecast?lang="+GestionPreferencias.getInstance().getIdioma(getApplicationContext())+"&units="+GestionPreferencias.getInstance().getUnidades(getApplicationContext())+"&lat="+ place.getLat() + "&lon="+ place.getLon() +"&appid="+ API;
         Log.d(TAG, url);
         root = Connector.getConector().get(Root.class,url);
     }

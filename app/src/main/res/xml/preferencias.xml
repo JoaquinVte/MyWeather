@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="API">
+
+        <ListPreference
+            android:defaultValue="standard"
+            android:entries="@array/unidades_entries"
+            android:entryValues="@array/unidades_values"
+            android:key="unidades"
+            android:summary="Unidades en"
+            android:title="Unidades" />
+        <ListPreference
+            android:defaultValue="es"
+            android:entries="@array/idioma_entries"
+            android:entryValues="@array/idioma_values"
+            android:key="idioma"
+            android:summary="Idioma en"
+            android:title="Idioma" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Apariencia">
+        <androidx.preference.ListPreference
+            android:dialogTitle="@string/settings_theme_dialog_title"
+            android:entries="@array/settings_theme_entries"
+            android:entryValues="@array/settings_theme_values"
+            android:key="@string/settings_theme_key"
+            android:title="@string/settings_theme_title" />
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>
